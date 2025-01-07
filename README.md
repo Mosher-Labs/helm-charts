@@ -30,6 +30,71 @@ Explore the charts, contribute, and streamline your Kubernetes deployments! 🤝
 
 ## Usage
 
+### Setup kubeconfig
+
+```bash
+scp -i ~/.ssh/ansible_key ansible@192.168.202.14:/etc/rancher/k3s/k3s.yaml ~/k3s.yaml
+sed -i '' 's/127.0.0.1/192.168.202.14/g' ~/k3s.yaml
+chmod 600 /Users/benniemosher/k3s.yaml
+export KUBECONFIG=~/k3s.yaml
+kubectl get nodes
+kubectl get deployments --namespace default
+kubectl get pods --namespace default
+kubectl get services --namespace default
+
+## More detailed queries
+kubectl describe deployment hello-world -n default
+kubectl describe pod <pod-name> -n default
+```
+
+### Deploy helm charts
+
+Package the Helm chart if you want to create a .tgz file:
+
+```bash
+helm package hello-world
+```
+
+Use the helm upgrade --install command to deploy or upgrade the
+Helm chart in your Kubernetes cluster. This command will install
+the chart if it is not already installed or upgrade it if it is
+already installed.
+
+```bash
+helm upgrade --install hello-world \
+./hello-world --namespace default
+```
+
+After running the Helm upgrade command, you can verify that the deployment
+was successful by checking the status of the release:
+
+```bash
+helm status hello-world --namespace default
+```
+
+### Troubleshoot cluster
+
+You can also use kubectl commands to check the status of the
+pods, services, and other resources:
+
+```bash
+kubectl get all -n default
+```
+
+To delete the hello-world deployment:
+
+```bash
+kubectl delete deployment hello-world --namespace default
+kubectl delete service hello-world --namespace default
+```
+
+To verify the deletion:
+
+```bash
+kubectl get deployments
+kubectl get services
+```
+
 ## 🔰 Contributing
 
 Upon first clone, install the pre-commit hooks.

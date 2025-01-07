@@ -1,0 +1,40 @@
+---
+replicaCount: 1
+fullnameOverride: "mosher-labs-hello-world"
+
+image:
+  repository: k8s.gcr.io/echoserver
+  tag: "1.10"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30001
+
+ingress:
+  enabled: false
+  annotations:
+    - nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: mosher-labs.local
+      paths: []
+  tls: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+serviceAccount:
+  create: true
+  name: ""
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

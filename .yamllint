@@ -1,7 +1,12 @@
+---
 extends: default
+
+ignore: |
+  hello-world/
 
 rules:
   line-length:
     ignore:
       - .github/workflows
       - taskfiles/infra/Taskfile.yml
+  braces: disable
