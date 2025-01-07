@@ -15,7 +15,6 @@ repos:
       - id: check-symlinks
       - id: check-toml
       - id: check-xml
-      - id: check-yaml
       - id: detect-private-key
       - id: double-quote-string-fixer
       - id: end-of-file-fixer
@@ -24,6 +23,10 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v24.12.2
+    hooks:
+      - id: ansible-lint
   - repo: https://github.com/markdownlint/markdownlint
     rev: v0.12.0
     hooks:
