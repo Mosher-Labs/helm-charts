@@ -16,10 +16,11 @@ service:
 ingress:
   enabled: false
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
   hosts:
     - host: mosher-labs.local
-      paths: []
+      paths:
+        - /
   tls: []
 
 autoscaling:

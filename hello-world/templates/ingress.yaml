@@ -10,16 +10,20 @@ metadata:
     {{- toYaml .Values.ingress.annotations | nindent 4 }}
 spec:
   rules:
-    - host: {{ .Values.ingress.host }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host }}
       http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: {{- include "hello-world.fullname" . }}
-                port:
-                  number: {{ .Values.service.port }}
+        {{- range .paths }}
+        - path: {{ . }}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ include "hello-world.fullname" $ }}
+              port:
+                number: {{ $.Values.service.port }}
+        {{- end }}
+    {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     - hosts:
