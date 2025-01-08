@@ -11,11 +11,12 @@ service:
   type: NodePort
   port: 80
   nodePort: 30001
+  targetPort: 8080
 
 ingress:
   enabled: false
   annotations:
-    - nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
     - host: mosher-labs.local
       paths: []

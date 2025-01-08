@@ -1,7 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 1. Get the application URL by running these commands:
   {{- range .Values.ingress.hosts }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}{{ range .paths }}{{ . }}{{ end }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}:{{ $.Values.service.nodePort }}{{ range .paths }}{{ . }}{{ end }}
   {{- end }}
 {{- else if eq .Values.service.type "LoadBalancer" -}}
 1. Get the application URL by running these commands:
