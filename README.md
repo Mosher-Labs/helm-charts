@@ -33,8 +33,8 @@ Explore the charts, contribute, and streamline your Kubernetes deployments! 🤝
 ### Setup kubeconfig
 
 ```bash
-scp -i ~/.ssh/ansible_key ansible@192.168.202.14:/etc/rancher/k3s/k3s.yaml ~/k3s.yaml
-sed -i '' 's/127.0.0.1/192.168.202.14/g' ~/k3s.yaml
+scp -i ~/.ssh/ansible_key ansible@192.168.202.10:/etc/rancher/k3s/k3s.yaml ~/k3s.yaml
+sed -i '' 's/127\.0\.0\.1/192\.168\.202\.10/g' ~/k3s.yaml
 chmod 600 /Users/benniemosher/k3s.yaml
 export KUBECONFIG=~/k3s.yaml
 kubectl get nodes
