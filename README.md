@@ -38,13 +38,13 @@ sed -i '' 's/127.0.0.1/<SERVER_IP>/g' ~/k3s.yaml
 chmod 600 /Users/benniemosher/k3s.yaml
 export KUBECONFIG=~/k3s.yaml
 kubectl get nodes
-kubectl get deployments --namespace default
-kubectl get pods --namespace default
-kubectl get services --namespace default
+kubectl get deployments
+kubectl get pods
+kubectl get services
 
 ## More detailed queries
-kubectl describe deployment hello-world -n default
-kubectl describe pod <pod-name> -n default
+kubectl describe deployment hello-world
+kubectl describe pod <pod-name>
 ```
 
 ### Deploy helm charts
@@ -61,15 +61,14 @@ the chart if it is not already installed or upgrade it if it is
 already installed.
 
 ```bash
-helm upgrade --install hello-world \
-./hello-world --namespace default
+helm upgrade --install hello-world ./hello-world
 ```
 
 After running the Helm upgrade command, you can verify that the deployment
 was successful by checking the status of the release:
 
 ```bash
-helm status hello-world --namespace default
+helm status hello-world
 ```
 
 ### Troubleshoot cluster
@@ -78,14 +77,14 @@ You can also use kubectl commands to check the status of the
 pods, services, and other resources:
 
 ```bash
-kubectl get all -n default
+kubectl get all
 ```
 
 To delete the hello-world deployment:
 
 ```bash
-kubectl delete deployment hello-world --namespace default
-kubectl delete service hello-world --namespace default
+kubectl delete deployment hello-world
+kubectl delete service hello-world
 ```
 
 To verify the deletion:
