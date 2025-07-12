@@ -1,5 +1,5 @@
 ---
-replicaCount: 1
+replicaCount: 2
 fullnameOverride: "mosher-labs-hello-world"
 
 image:
@@ -39,4 +39,10 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app: mosher-labs-hello-world
+        topologyKey: "kubernetes.io/hostname"

@@ -20,6 +20,13 @@ spec:
         app.kubernetes.io/name: {{ include "hello-world.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: {{ include "hello-world.name" . }}
+              topologyKey: "kubernetes.io/hostname"
       serviceAccountName: {{ include "hello-world.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
