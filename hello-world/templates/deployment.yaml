@@ -42,3 +42,24 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.service.targetPort }}
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          args:
+            - tunnel
+            - --no-autoupdate
+            - run
+            - --token
+            - $(CF_TOKEN)
+          env:
+            - name: CF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflared-credentials
+                  key: tunnel-token
+          volumeMounts:
+            - name: cloudflared-creds
+              mountPath: /etc/cloudflared
+      volumes:
+        - name: cloudflared-creds
+          secret:
+            secretName: cloudflared-credentials
