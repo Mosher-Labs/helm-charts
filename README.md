@@ -59,6 +59,24 @@ Package the Helm chart if you want to create a .tgz file:
 helm package hello-world
 ```
 
+Create a Cloudflare tunnel
+
+- Login to <https://one.dash.cloudflare.com>
+- Navigate to Networks > Tunnels
+- Create a tunnel, notating the TOKEN created for the next step.
+
+Use the kubectl create secrets command to create the secret with your tunnel
+token, replacing `<YOUR_TOKEN>`:
+
+```bash
+kubectl create secret generic cloudflared-credentials \
+  --from-literal=tunnel-token=<YOUR_TOKEN> \
+  --namespace default \
+  -o yaml
+```
+
+- Once showing active, edit your tunnel, and add a "Public hostnames"
+
 Use the helm upgrade --install command to deploy or upgrade the
 Helm chart in your Kubernetes cluster. This command will install
 the chart if it is not already installed or upgrade it if it is
