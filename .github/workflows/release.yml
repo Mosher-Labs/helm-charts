@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   release:
@@ -11,6 +12,8 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+    with:
+      enable_draft: ${{ github.ref_name != 'main' }}
 
   heimdallr:
     needs: release
@@ -22,3 +25,4 @@ jobs:
     secrets: inherit
     with:
       slack_message: "The project <https://github.com/${{ github.repository }}|${{ github.repository }}> just released version <https://github.com/${{ github.repository }}/releases/tag/${{ needs.release.outputs.next_version }}|${{ needs.release.outputs.next_version }}>."
+      enable_comment_on_pr: ${{ github.ref_name != 'main' }}
