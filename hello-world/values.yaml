@@ -1,6 +1,6 @@
 ---
-replicaCount: 2
-fullnameOverride: "mosher-labs-hello-world"
+replicaCount: 1
+fullnameOverride: "hello-world"
 
 image:
   repository: k8s.gcr.io/echoserver
@@ -20,11 +20,14 @@ ingress:
   hosts:
     - host: mosher-labs.local
       paths:
-        - /
+        - /hello-world
+    - host: labs.benniemosher.dev
+      paths:
+        - /hello-world
   tls: []
 
 autoscaling:
-  enabled: false
+  enabled: true
   minReplicas: 1
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
@@ -44,5 +47,5 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchLabels:
-            app: mosher-labs-hello-world
+            app: hello-world
         topologyKey: "kubernetes.io/hostname"

@@ -4,8 +4,9 @@ kind: Pod
 metadata:
   name: "{{ include "hello-world.fullname" . }}-test-connection"
   labels: {{- include "hello-world.labels" . | nindent 4 }}
-  {{/* annotations: */}}
-  {{/*   "helm.sh/hook": test */}}
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   containers:
     - name: "{{ include "hello-world.name" . }}"
