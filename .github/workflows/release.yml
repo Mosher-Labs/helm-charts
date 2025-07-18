@@ -13,7 +13,7 @@ jobs:
       issues: write
       pull-requests: write
     with:
-      enable_draft: ${{ github.ref_name != 'main' }}
+      enable_draft: ${{ github.ref_name != 'main' || github.event_name == 'pull_request' }}
 
   heimdallr:
     needs: release
@@ -25,4 +25,4 @@ jobs:
     secrets: inherit
     with:
       slack_message: ":mega: The project <https://github.com/${{ github.repository }}|${{ github.repository }}> just released version <https://github.com/${{ github.repository }}/releases/tag/${{ needs.release.outputs.next_version }}|${{ needs.release.outputs.next_version }}>. :mega:"
-      enable_comment_on_pr: ${{ github.ref_name != 'main' }}
+      enable_comment_on_pr: ${{ github.ref_name != 'main' || github.event_name == 'pull_request' }}

@@ -32,7 +32,7 @@ Explore the charts, contribute, and streamline your Kubernetes deployments! 🤝
 
 ### Setup kubeconfig
 
-Update `<SERVER_IP>` with the IP address of your k3s server.
+Update `<SERVER_IP>` (ie. `192.168.1.10`) with the IP address of your k3s server.
 
 ```bash
 scp -i $HOME/.ssh/ansible_key ansible@<SERVER_IP>:/etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
