@@ -13,7 +13,8 @@ jobs:
       issues: write
       pull-requests: write
     with:
-      enable_draft: ${{ github.ref_name != 'main' || github.event_name == 'pull_request' }}
+      # enable_draft: ${{ github.ref_name != 'main' || github.event_name == 'pull_request' }}
+      enable_draft: true
 
   heimdallr:
     needs: release
