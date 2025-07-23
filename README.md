@@ -32,15 +32,18 @@ Explore the charts, contribute, and streamline your Kubernetes deployments! 🤝
 
 ### Setup kubeconfig
 
-Update `<SERVER_IP>` with the IP address of your k3s server.
+Update `<SERVER_IP>` (ie. `192.168.1.10`) with the IP address of your k3s server.
+
+Update `<DOMAIN>` (ie. `mosher-labs.local`) with the domain address of
+your cloudflared tunnel.
 
 ```bash
 scp -i $HOME/.ssh/ansible_key ansible@<SERVER_IP>:/etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sed -i '' 's/127.0.0.1/<SERVER_IP>/g' $HOME/k3s.yaml
 chmod 600 $HOME/k3s.yaml
 export KUBECONFIG=$HOME/k3s.yaml
-sudo sed -i '' '/mosher-labs.local/d' /etc/hosts && \
-  echo "<SERVER_IP> mosher-labs.local" | sudo tee -a /etc/hosts
+sudo sed -i '' '/<DOMAIN>/d' /etc/hosts && \
+  echo "<SERVER_IP> <DOMAIN>" | sudo tee -a /etc/hosts
 kubectl get nodes
 kubectl get deployments
 kubectl get pods
