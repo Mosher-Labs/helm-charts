@@ -48,8 +48,10 @@ spec:
               port: http
             initialDelaySeconds: 2
             periodSeconds: 5
+{{- if .Values.cloudflared.enabled }}
+        # Cloudflared sidecar - only included if cloudflared.enabled=true
         - name: cloudflared
-          image: cloudflare/cloudflared:latest
+          image: "{{ .Values.cloudflared.image.repository }}:{{ .Values.cloudflared.image.tag }}"
           args:
             - tunnel
             - --no-autoupdate
@@ -60,12 +62,15 @@ spec:
             - name: CF_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: cloudflared-credentials
+                  name: {{ .Values.cloudflared.secretName }}
                   key: tunnel-token
           volumeMounts:
             - name: cloudflared-creds
               mountPath: /etc/cloudflared
+{{- end }}
       volumes:
+{{- if .Values.cloudflared.enabled }}
         - name: cloudflared-creds
           secret:
-            secretName: cloudflared-credentials
+            secretName: {{ .Values.cloudflared.secretName }}
+{{- end }}
