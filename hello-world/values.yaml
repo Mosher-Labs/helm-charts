@@ -38,6 +38,16 @@ serviceAccount:
 
 resources: {}
 
+# Cloudflared tunnel configuration
+# Set enabled: true when you have the cloudflared-credentials secret
+# This is the DEFAULT - can be overridden in ArgoCD Application
+cloudflared:
+  enabled: false  # Safe default - won't fail if secret is missing
+  image:
+    repository: cloudflare/cloudflared
+    tag: latest
+  secretName: cloudflared-credentials
+
 nodeSelector: {}
 
 tolerations: []
