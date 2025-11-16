@@ -217,10 +217,13 @@ This repository uses pre-commit hooks for quality control.
 **Setup:**
 
 ```bash
-pre-commit install
-pre-commit run -a --all-files
-pre-commit autoupdate
+pre-commit install              # One-time setup
+pre-commit run --all-files      # Run manually (DO THIS BEFORE COMMITTING!)
+pre-commit autoupdate           # Update hook versions
 ```
+
+**IMPORTANT:** Always run `pre-commit run --all-files` BEFORE committing
+to catch and fix linting errors (especially markdown formatting).
 
 ## Cloudflare Tunnels (Optional)
 
@@ -273,11 +276,12 @@ helm uninstall release-name
 ### When Working on This Repo
 
 1. **Prefer OSS charts** - Only create custom charts when no good alternative exists
-2. **Follow Helm best practices** - Use the hello-world chart as reference
-3. **Test locally** with `helm lint` and `--dry-run` before deploying
-4. **Document values** - Every value should have a comment explaining it
-5. **Version properly** - Semantic versioning for both chart and app
-6. **Create CLAUDE.md** in any new repo or sub-project
+1. **Follow Helm best practices** - Use the hello-world chart as reference
+1. **Test locally** with `helm lint` and `--dry-run` before deploying
+1. **Run pre-commit hooks** BEFORE committing (fix all errors!)
+1. **Document values** - Every value should have a comment explaining it
+1. **Version properly** - Semantic versioning for both chart and app
+1. **Create CLAUDE.md** in any new repo or sub-project
 
 ### Chart Distribution
 
