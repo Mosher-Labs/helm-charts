@@ -135,14 +135,14 @@ echo "<SERVER_IP> mosher-labs.local" | sudo tee -a /etc/hosts
 
 ### Deploying to Homelab
 
-**Option 1: Direct Helm Install**
+### Option 1: Direct Helm Install
 
 ```bash
 export KUBECONFIG=$HOME/k3s.yaml
 helm upgrade --install release-name ./chart-name --namespace namespace --create-namespace
 ```
 
-**Option 2: ArgoCD (Preferred)**
+### Option 2: ArgoCD (Preferred)
 
 Create ArgoCD Application in homelab-gitops repo:
 
@@ -231,9 +231,9 @@ The hello-world chart includes Cloudflare tunnel integration for external access
 
 **Setup:**
 
-1. Create tunnel at https://one.dash.cloudflare.com
-2. Note the TOKEN
-3. Create Kubernetes secret:
+1. Create tunnel at <https://one.dash.cloudflare.com>
+1. Note the TOKEN
+1. Create Kubernetes secret:
 
    ```bash
    kubectl create secret generic cloudflared-credentials \
@@ -241,7 +241,7 @@ The hello-world chart includes Cloudflare tunnel integration for external access
      --namespace default
    ```
 
-4. Enable in values.yaml or via --set
+1. Enable in values.yaml or via --set
 
 ## Common Commands
 
@@ -264,7 +264,7 @@ helm uninstall release-name
 
 ## Related Repositories
 
-- **homelab-gitops:** https://github.com/Mosher-Labs/homelab-gitops
+- **homelab-gitops:** <https://github.com/Mosher-Labs/homelab-gitops>
   - ArgoCD applications
   - Primary deployment repo
   - Uses OSS Helm charts (not this repo)
@@ -273,8 +273,32 @@ helm uninstall release-name
 
 ## Important Notes
 
+### Code Quality Standards
+
+**CRITICAL:** All code must adhere to linter rules from the start. Do NOT write
+code that needs fixing after running pre-commit hooks.
+
+**Markdown (markdownlint):**
+
+Configuration: `.markdownlint.yaml` (allows 2-space indent, 120 char lines)
+
+- Nested lists under unordered items: Use 2-space indentation
+- Nested lists under ordered items: Use 2-space indentation
+- Inline format for simple nested items: `**Item:** Detail 1, Detail 2`
+- Line length: 120 characters max (code/tables excluded)
+- Bare URLs: Allowed in reference sections
+- Bold for emphasis: Allowed in lists
+
+**YAML (yamllint):**
+
+- Maximum line length: 80 characters
+- Use 2-space indentation
+- No trailing whitespace
+- Proper quoting for strings containing special characters
+
 ### When Working on This Repo
 
+1. **Write linter-compliant code from the start** - Don't fix after the fact
 1. **Prefer OSS charts** - Only create custom charts when no good alternative exists
 1. **Follow Helm best practices** - Use the hello-world chart as reference
 1. **Test locally** with `helm lint` and `--dry-run` before deploying
@@ -290,16 +314,16 @@ Currently, charts are used directly from this repo (not published to a chart reg
 **To publish to a chart repository (future):**
 
 1. Package charts: `helm package chart-name`
-2. Create index: `helm repo index .`
-3. Host on GitHub Pages, S3, or chart registry
-4. Add repo: `helm repo add mosher-labs <URL>`
+1. Create index: `helm repo index .`
+1. Host on GitHub Pages, S3, or chart registry
+1. Add repo: `helm repo add mosher-labs <URL>`
 
 ## References
 
 - @README.md - Repository overview and quick start
-- Helm Docs: https://helm.sh/docs/
-- Helm Best Practices: https://helm.sh/docs/chart_best_practices/
-- ArtifactHub: https://artifacthub.io/ (find OSS charts)
+- Helm Docs: <https://helm.sh/docs/>
+- Helm Best Practices: <https://helm.sh/docs/chart_best_practices/>
+- ArtifactHub: <https://artifacthub.io/> (find OSS charts)
 
 ---
 
