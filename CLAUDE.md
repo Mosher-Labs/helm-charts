@@ -335,3 +335,27 @@ This file should be updated whenever:
 - Best practices change
 - Deployment patterns change
 - Important context is discovered
+
+## Git Workflow
+
+1. **Create feature branch:** `git checkout -b feature/description`
+1. **Make changes** to charts, templates, or documentation
+1. **ALWAYS run pre-commit BEFORE committing:** `pre-commit run --all-files`
+   - Fix ALL errors (especially YAML and markdown linting)
+   - Do NOT commit with `--no-verify` unless absolutely necessary
+1. **Commit with conventional format:** `git commit -m "type: description"`
+1. **Push and create PR:** `gh pr create --title "feat: description"`
+1. **Test changes:** If your changes reference shared workflows that were also updated,
+   temporarily change the reference from `@main` to `@your-branch` to test, verify
+   the PR passes, then change back to `@main` before merging
+1. **Merge to main:** Changes are available for deployment
+
+**Commit Format:** Conventional Commits (enforced by pre-commit hook)
+
+- `feat:` - New feature or chart
+- `fix:` - Bug fix
+- `docs:` - Documentation changes
+- `chore:` - Maintenance
+- `refactor:` - Code refactoring
+- `test:` - Temporary test changes (like branch references)
+
