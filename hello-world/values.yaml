@@ -3,7 +3,7 @@ replicaCount: 1
 fullnameOverride: "hello-world"
 
 image:
-  repository: k8s.gcr.io/echoserver
+  repository: registry.k8s.io/echoserver
   tag: "1.10"
   pullPolicy: IfNotPresent
 
