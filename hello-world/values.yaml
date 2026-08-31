@@ -36,7 +36,16 @@ serviceAccount:
   create: true
   name: ""
 
-resources: {}
+# Requests are required for the HPA's targetCPUUtilizationPercentage to be
+# computable - without a cpu request, the HPA can't calculate utilization
+# and reports ScalingActive: False (FailedGetResourceMetric).
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi
 
 # Cloudflared tunnel configuration
 # Set enabled: true when you have the cloudflared-credentials secret
@@ -47,6 +56,13 @@ cloudflared:
     repository: cloudflare/cloudflared
     tag: latest
   secretName: cloudflared-credentials
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
 
 nodeSelector: {}
 
