@@ -4,7 +4,7 @@ fullnameOverride: "hello-world"
 
 image:
   repository: registry.k8s.io/echoserver
-  tag: "1.10"
+  tag: "1.10@sha256:cb5c1bddd1b5665e1867a7fa1b5fa843a47ee433bbb75d4293888b71def53229"
   pullPolicy: IfNotPresent
 
 service:
@@ -54,7 +54,7 @@ cloudflared:
   enabled: false  # Safe default - won't fail if secret is missing
   image:
     repository: cloudflare/cloudflared
-    tag: latest
+    tag: latest@sha256:072c067d25ccbe61d46e18f0d0723255f2bb5304f7317caa95b27031520ff92c
   secretName: cloudflared-credentials
   resources:
     requests:
