@@ -54,7 +54,7 @@ cloudflared:
   enabled: false  # Safe default - won't fail if secret is missing
   image:
     repository: cloudflare/cloudflared
-    tag: latest@sha256:4955524aeaa379e154023d5a027c250f7b35041a2e7e950cf13f144bc9b9c5ba
+    tag: latest@sha256:55c7e3e8d89d5e8d20b75a82f3602cbf98e06db406e73e282073cfdc5a9a3af6
   secretName: cloudflared-credentials
   resources:
     requests:
